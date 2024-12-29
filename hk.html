@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+        background-color: black;
+        color:white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    align-items: center;
+    }
+    button{
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid white;
+        background-color: black;
+        color:white;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div class="cont">
+        <button class="btn" onclick="fun(1)">1</button>
+        <button class="btn" onclick="fun(2)">2</button>
+        <button class="btn" onclick="fun(3)">3</button>
+    </div>
+    <div class="cont">
+        <button class="btn" onclick="fun(4)">4</button>
+  <button class="btn" onclick="fun(5)">5</button>
+  <button class="btn" onclick="fun(6)">6</button>
+  
+    </div>
+  
+  <p class="upara">YOU:</p>
+  <p class="cpara">COMPUTER:</p>
+  <p class="score">RUNS:</p>
+  <p class="target">TARGET:</p>
+  <p class="result"></p>
+  <button onclick="clears()">RESTART</button>
+</body>
+<script>
+    var gameover = false;
+    var score = 0;
+    var target = Math.floor((Math.random() * 30)+1); 
+  
+    const btn = document.querySelectorAll('.btn');
+    const cpara = document.querySelector('.cpara');
+    const upara = document.querySelector('.upara');
+    const scores = document.querySelector('.score');
+    const targets = document.querySelector('.target');
+    const res = document.querySelector('.result');
+  
+    
+    targets.textContent = `TARGET: ${target}`;
+  
+    function fun(userChoice) {
+      const computerChoice = Math.floor((Math.random() * 3) + 1);
+      
+      if (!gameover) {
+        upara.textContent = `YOU: ${userChoice}`;
+        cpara.textContent = `COMPUTER: ${computerChoice}`;
+        
+        if (userChoice === computerChoice) {
+          scores.textContent = `OUT!!!  RUNS: ${score}`;
+          gameover = true;
+          if (score < (target-1)) {
+            res.textContent = "YOU LOOSE";
+          } else if(score===(target-1)) {
+            res.textContent = "TIE";
+          }
+        } else {
+          score += userChoice; 
+          scores.textContent = `RUNS: ${score}`;
+          if (score >= target) {
+            res.textContent = "YOU WIN";
+            gameover = true;
+          } 
+        }
+        
+      }
+    }
+    function clears(){
+        upara.textContent ="YOU:";
+        cpara.textContent = "COMPUTER:";
+        scores.textContent = "RUNS:";
+        target= Math.floor((Math.random() * 30)+1); 
+        targets.textContent = `TARGET: ${target}`;
+        res.textContent = ``;
+        gameover = false;
+        score = 0;
+    }
+  </script>
+  
+</html>
