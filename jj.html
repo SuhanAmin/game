@@ -94,7 +94,8 @@
   cpara.textContent = `COMPUTER: ${computerChoice}`;
   
   if (userChoice === computerChoice) {
-    scores.textContent = `OUT!!! RUNS: ${cscore}`;
+    scores.textContent =`OUT!!!  RUNS: ${cscore}`;
+    console.log("OUT");// This line
     if (cscore <= target) {
       res.textContent = "YOU WIN ";
       gameover = true;
@@ -105,13 +106,13 @@
     }
   } else {
     cscore += computerChoice;
-    scores.textContent = `Runs: ${cscore}`;
+    scores.textContent = `RUNS: ${cscore}`;
     if (cscore >= target) {
       res.textContent = "COMPUTER WINS";
       gameover = true;
     }
   }
- 
+  
 }
 
     }
