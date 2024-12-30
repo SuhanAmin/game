@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+        background-color: black;
+        color:white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    align-items: center;
+    }
+    button{
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid white;
+        background-color: black;
+        color:white;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+ 
+  <div class="cont">
+    <button class="btn" onclick="fun(1)">1</button>
+    <button class="btn" onclick="fun(2)">2</button>
+    <button class="btn" onclick="fun(3)">3</button>
+</div>
+<div class="cont">
+    <button class="btn" onclick="fun(4)">4</button>
+<button class="btn" onclick="fun(5)">5</button>
+<button class="btn" onclick="fun(6)">6</button>
+
+</div>
+<p class="turn"></p>
+  <p class="upara">YOU:</p>
+  <p class="cpara">COMPUTER:</p>
+  <p class="score">RUNS:</p>
+  <p class="target">TARGET:</p>
+  <p class="result"></p>
+  <button onclick="clears()">RESTART</button>
+</body>
+<script>
+  
+  var gameover = false;
+  var userbat=true;
+  var cscore = 0;
+  var uscore = 0;
+  var target = 0; 
+  var t = document.querySelector('.turn');
+  const btn = document.querySelectorAll('.btn');
+  const cpara = document.querySelector('.cpara');
+  const upara = document.querySelector('.upara');
+  const scores = document.querySelector('.score');
+  const targets = document.querySelector('.target');
+  const res = document.querySelector('.result');
+  function compcomp(){
+    return  Math.floor((Math.random() * 6) + 1);
+  }
+  
+  function fun(userChoice) {
+    if (gameover) {
+    alert("Game over!");
+    return;
+  }
+    const computerChoice = compcomp();
+    
+    if (userbat) {
+      upara.textContent = `YOU: ${userChoice}`;
+      cpara.textContent = `COMPUTER: ${computerChoice}`;
+      
+      if (userChoice === computerChoice) {
+       
+        scores.textContent = `OUT!!!  RUNS: ${uscore}`;
+        
+        
+        target = uscore + 1; 
+        targets.textContent = `TARGET: ${target}`;
+       
+        userbat=false;
+        t.textContent = "COMPUTER TURN";
+      } else {
+        uscore += userChoice; 
+        scores.textContent = `RUNS: ${uscore}`;
+      }
+    }
+    else {
+  upara.textContent = `YOU: ${userChoice}`;
+  cpara.textContent = `COMPUTER: ${computerChoice}`;
+  
+  if (userChoice === computerChoice) {
+    scores.textContent = cscore; // This line
+    if (cscore <= target) {
+      res.textContent = "YOU WIN ";
+      gameover = true;
+    }
+    if (cscore === (target - 1)) {
+      res.textContent = "TIE";
+      gameover = true;
+    }
+  } else {
+    cscore += computerChoice;
+    scores.textContent = `Runs: ${cscore}`;
+    if (cscore >= target) {
+      res.textContent = "COMPUTER WINS";
+      gameover = true;
+    }
+  }
+  scores.textContent = `RUNS: ${cscore}`;
+}
+
+    }
+  
+
+  function clears() {
+   
+      upara.textContent = "YOU:";
+    cpara.textContent = "COMPUTER:";
+    scores.textContent = "RUNS:";
+    targets.textContent = "TARGET: ";
+    res.textContent = '';
+    userbat=true;
+    gameover=false;
+    cscore=0;
+    uscore=0;
+    target=0;
+    
+   
+  
+  }
+</script>
+</html>
