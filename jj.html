@@ -94,7 +94,7 @@
   cpara.textContent = `COMPUTER: ${computerChoice}`;
   
   if (userChoice === computerChoice) {
-    scores.textContent = cscore; // This line
+    scores.textContent = `OUT!!! RUNS: ${cscore}`;
     if (cscore <= target) {
       res.textContent = "YOU WIN ";
       gameover = true;
@@ -111,7 +111,7 @@
       gameover = true;
     }
   }
-  scores.textContent = `RUNS: ${cscore}`;
+ 
 }
 
     }
