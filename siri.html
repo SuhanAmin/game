@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button{
+            padding: 20px;;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">START LISTENING</button>
+<script>
+    const btn=document.getElementById('btn');
+    const reco=new(window.SpeechRecognition || window.webkitSpeechRecognition)();
+    reco.lang="en-US";
+    btn.addEventListener('click',()=>{
+        function speak(text){
+            const abc=new SpeechSynthesisUtterance(text);
+           
+            window.speechSynthesis.speak(abc);
+            btn.textContent="LISTENING...";
+            btn.style.backgroundColor="red";
+        }
+        function handle(command){
+            if(command.includes("open youtube")){
+                speak("OPening youtube");
+                window.open("https://www.youtube.com","_blank");
+            }
+            else  if(command.includes("open whatsapp")){
+                speak("OPening whatsapp");
+                window.open("https://www.whatsapp.com","_blank");
+            }
+            else if(command.includes("open google")){
+                speak("opening google");
+                window.open("https://www.google.com","_blank");
+            }
+            else if(command.includes("open instagram")){
+                speak("opening instagram");
+                window.open("https://www.instagram.com","_blank");
+            }
+            else{
+
+                speak("opening ");
+                window.open(`https://www.google.com/search?q=${command}`,"_blank");
+            }
+           
+           
+        }
+        speak("How can i help you");
+        setTimeout(() => {
+            
+        reco.start();
+        }, 1000);
+        reco.onend=()=>{
+           
+            btn.textContent="START LISTENING";
+            btn.style.backgroundColor="white";
+        }
+        reco.onresult=(event)=>{
+            const command=event.results[0][0].transcript.toLowerCase();
+            
+            
+            handle(command);                                              
+        }
+    })
+   
+</script>
+</body>
+</html>
